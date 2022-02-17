@@ -46,4 +46,45 @@ class PosterManagerTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldReturnLastPostersLessThenLimit() {
+        PosterManager manager = new PosterManager(3);
+
+        manager.addNewPoster("matrix");
+        manager.addNewPoster("clan soprano");
+
+        String[] expected = {"clan soprano", "matrix"};
+        String[] actual = manager.getLastMovies();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnLastPostersMoreThenLimit() {
+        PosterManager manager = new PosterManager(3);
+
+        manager.addNewPoster("matrix");
+        manager.addNewPoster("clan soprano");
+        manager.addNewPoster("1+1");
+        manager.addNewPoster("blade runner");
+
+        String[] expected = {"blade runner", "1+1", "clan soprano"};
+        String[] actual = manager.getLastMovies();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnLastPostersEqualLimit() {
+        PosterManager manager = new PosterManager(3);
+
+        manager.addNewPoster("matrix");
+        manager.addNewPoster("clan soprano");
+        manager.addNewPoster("1+1");
+
+        String[] expected = {"1+1", "clan soprano", "matrix"};
+        String[] actual = manager.getLastMovies();
+
+        assertArrayEquals(expected, actual);
+    }
 }
